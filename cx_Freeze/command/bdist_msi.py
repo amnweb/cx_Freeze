@@ -1244,10 +1244,12 @@ class bdist_msi(Command):
 
         if self.product_code is None:
             self.product_code = gen_uuid()
+        # Use distribution name for ProductName, not target_name
+        product_name = self.distribution.get_name()
         self.db = init_database(
             installer_name,
             schema,
-            self.target_name,
+            product_name,
             self.product_code,
             base_version,
             author,
